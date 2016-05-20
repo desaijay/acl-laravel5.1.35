@@ -1,4 +1,0 @@
-@can("everything")
-hiiii
-@endcan
-

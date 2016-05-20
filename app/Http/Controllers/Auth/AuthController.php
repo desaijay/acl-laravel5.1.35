@@ -10,6 +10,15 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+  public function redirectPath()
+{
+    // Logic that determines where to send the user
+    if (\Auth::user()->hasRole("admin")) {
+        return '/admin234';
+    }
+
+    return '/dashboard';
+}
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller

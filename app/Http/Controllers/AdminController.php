@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Role;
 use App\Permission;
 use App\User;
+
 class AdminController extends Controller
 {
     /**
@@ -19,13 +20,12 @@ class AdminController extends Controller
      */
     public function index()
     {
+        
         $roles = Role::all();
         $perm = Permission::all();
-       
-
         $users  = User::all();
         
-        return view("welcome", compact("roles", "perm", "users","p"));
+        return view("welcome", compact("roles", "perm", "users"));
 
     }
 
