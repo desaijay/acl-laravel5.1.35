@@ -35,14 +35,28 @@ Route::post("/give/permission", "AdminController@permissions");
 
 Route::post("revoke/permission/{id}", "AdminController@revoke");
 
-// Route::get("/connect", function(){
-// 	$user = Auth::loginUsingId(2);
-// 	return $user->hasRole("admin")? "yes": "no";
-	
-// });
+
+Route::get("admin", "AdminController@index2");
+Route::get("connect", "AdminController@index2");
 
 Route::post("/revoke/userrole/{id}", "AdminController@revokeuserrole");
 
 Route::post("/assignroletouser","AdminController@assignroletouser");
+
+Route::get('/total', function(){
+	// $user = \App\User::count();
+	// //$value = Config::get('app.timezone');
+	// //$v = Config::set('app.timezone', 'America/Chicago');
+	// $value = Config::get('app.timezone');
+	$agent = $_SERVER["HTTP_USER_AGENT"];
+	$agent1 = $_SERVER['SERVER_NAME'];
+	dd($agent1);
+
+});
+
+Route::get('/date', function(){
+	
+	return view("date");
+});
 
 

@@ -10,9 +10,15 @@ use App\Http\Controllers\Controller;
 use App\Role;
 use App\Permission;
 use App\User;
+use Auth;
 
 class AdminController extends Controller
 {
+    public function __construct()
+ {
+    $this->middleware('auth');
+    $this->middleware('admin');
+ }
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +34,14 @@ class AdminController extends Controller
         return view("welcome", compact("roles", "perm", "users"));
 
     }
+
+    public function index2()
+    {
+      
+        return "yes";
+
+    
+}
 
     /**
      * Show the form for creating a new resource.
