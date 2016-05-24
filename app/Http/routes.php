@@ -1,4 +1,8 @@
 <?php
+use Illuminate\Http\Request;
+use App\User;
+use Carbon\Carbon;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -55,8 +59,35 @@ Route::get('/total', function(){
 });
 
 Route::get('/date', function(){
-	
-	return view("date");
+	$db = User::all();
+	return view("date",compact("db"));
 });
 
+Route::get("/date1", function(Request $request){
 
+	//var_dump($v1);
+$input1  = $request["daterangepicker_start"];
+	$input2 = $request["daterangepicker_end"];
+
+	if(isset($input1) && isset($input2)){
+	Config::set('app.timezone',  'UTC');
+	$startDate  = strtotime($input1);
+	$endDate = strtotime($input2);
+
+	
+
+
+	Config::set('app.timezone',  'Asia/Kolkata');
+	$startDate = date('Y-m-d H:i:s', $startDate);
+	$endDate = date('Y-m-d H:i:s', $endDate);
+	$endDate = new Datetime($endDate);
+	$endDate  = $endDate->modify("+1 DAY");
+	
+		$db = DB::table("users")
+					->where("created_at", ">=", $startDate)
+					->where("created_at","<",$endDate)
+					->orderBy("created_at")
+					->get();
+		return view("date1", compact("db"));	
+	}
+});
